@@ -10,6 +10,7 @@ Vagrant.configure('2') do |config|
   config.vm.network :forwarded_port, host: 3306, guest: 3306
   config.vm.network :forwarded_port, host: 8080, guest: 8080
   config.vm.network :forwarded_port, host: 5000, guest: 5000
+  config.vm.network :forwarded_port, host: 5432, guest: 5432
   config.vm.network :forwarded_port, host: 8082, guest: 8082
   config.vm.network :forwarded_port, host: 9000, guest: 9000
   config.vm.network :forwarded_port, host: 9292, guest: 9292
@@ -22,5 +23,7 @@ Vagrant.configure('2') do |config|
   config.vm.provider 'virtualbox' do |v|
     v.memory = 512
     v.cpus = 2
+    v.customize [ "guestproperty", "set", :id, "/VirtualBox/GuestAdd/VBoxService/--timesync-set-threshold", 1000 ]
   end
+
 end

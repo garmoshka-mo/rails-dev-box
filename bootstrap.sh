@@ -40,6 +40,11 @@ SQL
 sed -i -e 's/127\.0\.0\.1/0\.0\.0\.0/g' /etc/mysql/mysql.conf.d/mysqld.cnf
 /etc/init.d/mysql restart
 
+# Postgres
+install PostgreSQL postgresql postgresql-contrib libpq-dev
+sudo -u postgres createuser --superuser vagrant
+
+
 # Libs
 install 'Nokogiri dependencies' libxml2 libxml2-dev libxslt1-dev
 install 'ExecJS runtime' nodejs
