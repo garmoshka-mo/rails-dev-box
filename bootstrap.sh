@@ -27,6 +27,7 @@ echo installing Bundler
 gem install bundler -N >/dev/null 2>&1
 
 install Git git
+install Redis redis-server
 
 # MySQL
 debconf-set-selections <<< 'mysql-server mysql-server/root_password password root'
