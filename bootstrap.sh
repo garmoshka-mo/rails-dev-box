@@ -44,7 +44,18 @@ sed -i -e 's/127\.0\.0\.1/0\.0\.0\.0/g' /etc/mysql/mysql.conf.d/mysqld.cnf
 
 # Postgres
 install PostgreSQL postgresql postgresql-contrib libpq-dev
+
 sudo -u postgres createuser --superuser vagrant
+sudo -u postgres createdb vagrant
+sudo -u postgres createuser --superuser root
+sudo -u postgres createdb root
+psql -c "ALTER USER vagrant WITH PASSWORD 'vagrant';"
+
+echo '
+host    all             all             0.0.0.0/0            md5' >> /etc/postgresql/9.4/main/pg_hba.conf
+echo "
+listen_addresses='*'" >> /etc/postgresql/9.4/main/postgresql.conf
+service postgresql restart
 
 
 # Libs
