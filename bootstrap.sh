@@ -36,6 +36,7 @@ install MySQL mysql-server libmysqlclient-dev
 mysql -uroot -proot <<SQL
 CREATE USER 'vagrant'@'%' IDENTIFIED BY 'vagrant';
 GRANT ALL PRIVILEGES ON *.* to 'vagrant'@'%' WITH GRANT OPTION;
+CREATE DATABASE vagrant;
 SQL
 
 sed -i -e 's/127\.0\.0\.1/0\.0\.0\.0/g' /etc/mysql/mysql.conf.d/mysqld.cnf
