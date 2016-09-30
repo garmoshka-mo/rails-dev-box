@@ -15,11 +15,12 @@ Vagrant.configure('2') do |config|
   config.vm.network :forwarded_port, host: 8082, guest: 8082
   config.vm.network :forwarded_port, host: 9000, guest: 9000
   config.vm.network :forwarded_port, host: 9292, guest: 9292
+  config.vm.network :forwarded_port, host: 9292, guest: 9292
+  config.vm.network :forwarded_port, host: 35729, guest: 35729 # guard-livereload
 
   config.vm.provision :shell, path: 'bootstrap.sh', keep_color: true
 
   config.vm.synced_folder "../", "/home/vagrant/repos"
-  config.vm.synced_folder "../../temp/", "/home/vagrant/temp"
 
   config.vm.provider 'virtualbox' do |v|
     v.memory = 512

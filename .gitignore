@@ -1,3 +1,4 @@
 .vagrant
 rails
 .idea/
+.DS_Store
