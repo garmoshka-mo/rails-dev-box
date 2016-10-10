@@ -28,4 +28,6 @@ Vagrant.configure('2') do |config|
     v.customize [ "guestproperty", "set", :id, "/VirtualBox/GuestAdd/VBoxService/--timesync-set-threshold", 1000 ]
   end
 
+  config.ssh.forward_agent = true
+
 end
