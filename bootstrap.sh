@@ -51,9 +51,9 @@ sudo -u postgres createdb root
 psql -c "ALTER USER vagrant WITH PASSWORD 'vagrant';"
 
 echo '
-host    all             all             0.0.0.0/0            md5' >> /etc/postgresql/9.4/main/pg_hba.conf
+host    all             all             0.0.0.0/0            md5' >> /etc/postgresql/9.5/main/pg_hba.conf
 echo "
-listen_addresses='*'" >> /etc/postgresql/9.4/main/postgresql.conf
+listen_addresses='*'" >> /etc/postgresql/9.5/main/postgresql.conf
 service postgresql restart
 
 

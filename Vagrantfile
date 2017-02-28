@@ -1,7 +1,7 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 Vagrant.configure('2') do |config|
-  config.vm.box      = 'ubuntu/wily64'
+  config.vm.box      = 'ubuntu/xenial64'
   config.vm.hostname = 'rails-dev-box'
 
   config.vm.network :forwarded_port, host: 3000, guest: 3000
@@ -20,7 +20,7 @@ Vagrant.configure('2') do |config|
 
   config.vm.provision :shell, path: 'bootstrap.sh', keep_color: true
 
-  config.vm.synced_folder "../", "/home/vagrant/repos"
+  config.vm.synced_folder "../", "/home/ubuntu/repos"
 
   config.vm.provider 'virtualbox' do |v|
     v.memory = 512
