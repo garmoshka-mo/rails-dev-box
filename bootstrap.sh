@@ -64,4 +64,9 @@ install 'ExecJS runtime' nodejs
 # Needed for docs generation.
 update-locale LANG=en_US.UTF-8 LANGUAGE=en_US.UTF-8 LC_ALL=en_US.UTF-8
 
+echo '
+alias bu=bundle
+alias be="bundle exec"
+' >> ~/.bashrc
+
 echo 'all set, rock on!'
