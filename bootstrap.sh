@@ -68,6 +68,6 @@ echo '
 alias bu=bundle
 alias be="bundle exec"
 alias sp=bin/rspec
-' >> ~/.bashrc
+' >> /home/ubuntu/.bashrc
 
 echo 'all set, rock on!'

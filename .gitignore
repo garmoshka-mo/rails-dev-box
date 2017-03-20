@@ -2,3 +2,4 @@
 rails
 .idea/
 .DS_Store
+*.log
