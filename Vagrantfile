@@ -8,8 +8,6 @@ Vagrant.configure('2') do |config|
   config.vm.network :forwarded_port, host: 3001, guest: 3001
   config.vm.network :forwarded_port, host: 3808, guest: 3808
   config.vm.network :forwarded_port, host: 3306, guest: 3306
-  config.vm.network :forwarded_port, host: 8080, guest: 8080
-  config.vm.network :forwarded_port, host: 5000, guest: 5000
   config.vm.network :forwarded_port, host: 5432, guest: 5432
   config.vm.network :forwarded_port, host: 6379, guest: 6379
   config.vm.network :forwarded_port, host: 8082, guest: 8082
@@ -20,7 +18,8 @@ Vagrant.configure('2') do |config|
 
   config.vm.provision :shell, path: 'bootstrap.sh', keep_color: true
 
-  config.vm.synced_folder "../", "/home/ubuntu/repos"
+  config.vm.synced_folder "../", "/home/ubuntu/repos", fsnotify: true
+  config.vm.synced_folder "../../Documents/temp", "/home/ubuntu/temp", fsnotify: true
 
   config.vm.provider 'virtualbox' do |v|
     v.memory = 512
