@@ -19,7 +19,6 @@ Vagrant.configure('2') do |config|
   config.vm.provision :shell, path: 'bootstrap.sh', keep_color: true
 
   config.vm.synced_folder "../", "/home/ubuntu/repos", fsnotify: true
-  config.vm.synced_folder "../../Documents/temp", "/home/ubuntu/temp", fsnotify: true
 
   config.vm.provider 'virtualbox' do |v|
     v.memory = 512
