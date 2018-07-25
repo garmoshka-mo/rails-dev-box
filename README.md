@@ -1,37 +1,57 @@
-# A Virtual Machine for Ruby on Rails Core Development
+# A Virtual Machine for Ruby on Rails
 
 ## Introduction
 
-**Please note this VM is not designed for Rails application development, only Rails core development.**
-
-This project automates the setup of a development environment for working on Ruby on Rails itself. Use this virtual machine to work on a pull request with everything ready to hack and run the test suites.
+This project automates the setup of a development environment for working on Ruby on Rails.
 
 ## Requirements
 
-* [VirtualBox](https://www.virtualbox.org)
+First install two applications on your host machine:
 
+* [VirtualBox](https://www.virtualbox.org)
 * [Vagrant](http://vagrantup.com)
 
 ## How To Build The Virtual Machine
 
 Building the virtual machine is this easy:
 
-    host $ git clone https://github.com/garmoshka-mo/rails-dev-box
-    host $ cd rails-dev-box
-    host $ vagrant up
+1. Create folder `repos` at convenient location on your host machine. This will be the folder, where you will keep all your working repositories.
+2. Open terminal, go into `repos` and execute following commands:
+
+```
+host$ git clone https://github.com/garmoshka-mo/rails-dev-box
+host$ cd rails-dev-box
+host$ vagrant up
+```
 
 That's it.
 
 After the installation has finished, you can access the virtual machine with
 
-    host $ vagrant ssh
+    host$ vagrant ssh
     Welcome to Ubuntu 14.04.2 LTS (GNU/Linux 3.13.0-55-generic x86_64)
     ...
-    vagrant@rails-dev-box:~$
+    vagrant@rails-dev-box:~$ ls
+	repos 
+    ubuntu@rails-dev-box:~$ cd repos/
+    ubuntu@rails-dev-box:~/repos$ ls
+    rails-dev-box
 
-Port 3000 in the host computer is forwarded to port 3000 in the virtual machine. Thus, applications running in the virtual machine can be accessed via localhost:3000 in the host computer. Be sure the web server is bound to the IP 0.0.0.0, instead of 127.0.0.1, so it can access all interfaces:
+This `~/repos` folder is mounted from your host machine. Here you will have all of your working repositories available from Virtual Machine and from host machine at same time.
+
+Port 3000 in the host computer is forwarded to port 3000 in the virtual machine. Thus, applications running in the virtual machine can be accessed via localhost:3000 in the host computer. 
+
+Rails version before 5 doesn't listen 0.0.0.0 by default. Be sure the web server is bound to the IP 0.0.0.0, instead of 127.0.0.1, so it can access all interfaces:
 
     bin/rails server -b 0.0.0.0
+	
+## Connect to database
+	
+To work with postgres database:
+	
+1. Download postgres UI for your OS (e.g. Postico for OsX)
+2. Connect to host localhost:5432
+3. Use login/password: `vagrant` / `vagrant`
 
 ## What's In The Box
 
