@@ -13,6 +13,17 @@ mkswap /swapfile
 swapon /swapfile
 echo '/swapfile none swap defaults 0 0' >> /etc/fstab
 
+# Safe poweroff
+mv /sbin/poweroff /sbin/real_poweroff
+echo 'echo are you sure?
+read x
+if [ "$x" = "yes" ]
+then
+  /sbin/real_poweroff
+fi
+' > /sbin/poweroff
+chmod a+x /sbin/poweroff
+
 echo updating package information
 apt-add-repository -y ppa:brightbox/ruby-ng >/dev/null 2>&1
 apt-get -y update >/dev/null 2>&1
@@ -27,22 +38,6 @@ echo installing Bundler
 gem install bundler -N >/dev/null 2>&1
 
 install Redis redis-server
-
-# MySQL
-: "
-debconf-set-selections <<< 'mysql-server mysql-server/root_password password root'
-debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password root'
-install MySQL mysql-server libmysqlclient-dev
-mysql -uroot -proot <<SQL
-CREATE USER 'vagrant'@'%' IDENTIFIED BY 'vagrant';
-GRANT ALL PRIVILEGES ON *.* to 'vagrant'@'%' WITH GRANT OPTION;
-CREATE DATABASE vagrant;
-SQL
-
-sed -i 's/start on/#start on/g' /etc/init/mysql.conf
-sed -i -e 's/127\.0\.0\.1/0\.0\.0\.0/g' /etc/mysql/mysql.conf.d/mysqld.cnf
-/etc/init.d/mysql restart
-"
 
 # Postgres
 install PostgreSQL postgresql postgresql-contrib libpq-dev

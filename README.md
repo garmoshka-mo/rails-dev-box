@@ -77,6 +77,26 @@ To work with postgres database:
 
 * An ExecJS runtime
 
+### MySQL
+
+```
+debconf-set-selections <<< 'mysql-server mysql-server/root_password password root'
+debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password root'
+install MySQL mysql-server libmysqlclient-dev
+mysql -uroot -proot <<SQL
+CREATE USER 'vagrant'@'%' IDENTIFIED BY 'vagrant';
+GRANT ALL PRIVILEGES ON *.* to 'vagrant'@'%' WITH GRANT OPTION;
+CREATE DATABASE vagrant;
+SQL
+
+sed -i 's/start on/#start on/g' /etc/init/mysql.conf
+sed -i -e 's/127\.0\.0\.1/0\.0\.0\.0/g' /etc/mysql/mysql.conf.d/mysqld.cnf
+/etc/init.d/mysql restart
+
+vi /etc/init/mysql.conf
+Comment out `start on`
+```
+
 ## Recommended Workflow
 
 The recommended workflow is
