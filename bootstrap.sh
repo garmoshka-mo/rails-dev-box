@@ -68,6 +68,8 @@ alias be="bundle exec"
 alias rk="bundle exec rake"
 alias sp=bin/rspec
 alias spe="bin/rspec -e"
+
+cd repos
 ' >> /home/vagrant/.bashrc
 
 echo 'all set, rock on!'
